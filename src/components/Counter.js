@@ -47,36 +47,42 @@ STEP 6:
 */
 
 import React from 'react'; /* STEP 0 */
+import {useState} from "react";
 
 export default function Counter() {
-  /* STEP 1 */
-
+  const [count, setCount] = useState(0);
+  const [even, setEven] = useState(true);
+ 
+  const Toggler = () => {
+    even ? setEven(false): setEven(true);
+  }
   const increment = () => {
-    /* STEP 4 */
+    setCount(count + 1)
+    Toggler()
   };
-  const decrement = () => {
-    /* STEP 5 */
+ const decrement = () => {
+    setCount(count - 1)
+    Toggler(even)
   };
-  const reset = () => {
-    /* STEP 6 */
+ const reset = () => {
+    setCount(0);
+    setEven(true);
   };
+ 
 
-  const style = {
-    fontSize: '1.5em',
-    marginBottom: '0.3em',
-    color: 'royalblue', /* STEP 2 */
-  };
+   /* STEP 2 */
+  
 
   return (
     <div className='widget-counter container'>
       <h2>Counter</h2>
-      <div id='count' style={style}>
-        Number 0 is even {/* STEP 3 */}
+      <div id='count'>
+        Number {count} is {even? <div>even</div> : <div> odd</div>} {/* {if count is even number, then string "even", else string "odd"}.STEP 3 */}
       </div>
       <div>
-        <button id='increment' onClick={increment}>Increment</button>
-        <button id='decrement' onClick={decrement}>Decrement</button>
-        <button id='resetCount' onClick={reset}>Reset</button>
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+        <button onClick={reset}>Reset</button>
       </div>
     </div>
   );
